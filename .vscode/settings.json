@@ -1,0 +1,7 @@
+{
+  "files.associations": {
+    "cpu.h": "c",
+    "display.h": "c",
+    "input.h": "c"
+  }
+}

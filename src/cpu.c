@@ -142,9 +142,9 @@ void load_rom(Chip8 *arch, char *path)
 }
 void decode_exec(Chip8 *chip, uint16_t opcode)
 {
+    printf("PC: 0x%04X, Opcode: 0x%04X\n", chip->pc, opcode);
     switch (opcode & 0xF000)
     {
-
     case 0x0000:
         switch (opcode & 0x00FF)
         {
@@ -177,13 +177,13 @@ void decode_exec(Chip8 *chip, uint16_t opcode)
         chip->V[(opcode & 0x0F00) >> 8] = random_byte() & (opcode & 0x00FF);
         break;
     case 0x3000:
-        if (chip->V[(opcode & 0x0F00) >> 8] == opcode & 0x00FF)
+        if (chip->V[(opcode & 0x0F00) >> 8] == (opcode & 0x00FF))
         {
             chip->pc += 2;
         }
         break;
     case 0x4000:
-        if (chip->V[(opcode & 0x0F00) >> 8] != opcode & 0x00FF)
+        if (chip->V[(opcode & 0x0F00) >> 8] != (opcode & 0x00FF))
         {
             chip->pc += 2;
         }
@@ -343,11 +343,14 @@ void decode_exec(Chip8 *chip, uint16_t opcode)
             chip->I = chip->V[(opcode & 0x0F00) >> 8] * 0x05;
             break;
         case 0x0033:
-            uint8_t value = chip->V[(opcode & 0x0F00) >> 8];
+        {
+            uint8_t value;
+            value = chip->V[(opcode & 0x0F00) >> 8];
             chip->memory[chip->I] = value / 100;
             chip->memory[chip->I + 1] = (value / 10) % 10;
             chip->memory[chip->I + 2] = value % 10;
             break;
+        }
         case 0x0055:
             for (int i = 0; i <= 0xF; i++)
             {

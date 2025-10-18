@@ -1,5 +1,6 @@
 CC := clang
 CFLAGS := -Wall -Wextra -std=c11
+LFLAGS := -lSDL2
 SRC_DIR := src
 BUILD_DIR := build
 TARGET := chip8
@@ -11,11 +12,11 @@ OBJS := $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
 all: $(TARGET)
 $(TARGET): $(OBJS)
 	@echo "🔗 Linking..."
-	$(CC) $(CFLAGS) $(OBJS) -o $(TARGET)
+	$(CC) $(CFLAGS) $(LFLAGS) $(OBJS) -o $(TARGET)
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(BUILD_DIR)
 	@echo "⚙️  Compiling $<..."
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS)  -c $< -o $@
 clean:
 	@echo "🧹 Cleaning..."
 	rm -rf $(BUILD_DIR) $(TARGET)

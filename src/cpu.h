@@ -5,6 +5,7 @@
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #define D_WIDTH 64
 #define D_HEIGHT 32
@@ -26,6 +27,8 @@ typedef struct
 
 extern uint8_t sprits[80];
 
+void init_random();
+uint8_t random_byte();
 Chip8 *chip_init();
 void load_rom(Chip8 *arch, char *path);
 void decode_exec(Chip8 *chip, uint16_t opcode);
