@@ -115,6 +115,9 @@ Example:
           |                              |
           |                              |
    0xFFF  --------------------------------  <--  End of RAM
+
+In the code i used base not ETI but could be swapped no issues
+
 ```
 ## References
 - [Chip-8 Specification by Tonis Agrista]("https://tonisagrista.com/blog/2021/chip8-spec/#jmp-v0-nnn--bnnn") – Detailed opcode reference.
